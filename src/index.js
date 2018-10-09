@@ -1,25 +1,21 @@
 module.exports = function getZerosCount(number, base) {
-let massiv = [];
-let nfs="";
-let ostatok, chastnoe;
-let bufer = number;
-do {
-  ostatok = bufer%base;
-  chastnoe = Math.floor(bufer/base);
-  massiv.push (ostatok);
-  bufer = chastnoe;
-} while(chastnoe>=base);
-  massiv.push (chastnoe);
-  for(let i = massiv.length-1;i>=0;i--){
-    nfs+=massiv[i];
-  }
-let rnfs=Number(nfs);
-
-  let five = 5;
-  let zerosCount = 0;
-  while (rnfs>five) {
-    zerosCount = zerosCount + Math.floor(rnfs/five);
-    five = five*5;
-  }
-  return zerosCount;
+let newBase = base;
+let zerosCount = number;
+for (let i = 2; i <= newBase; i++){
+  if (newBase % i == 0){
+    let multipliers = 0;
+    while (newBase % i == 0){
+      multipliers++;
+      newBase = Math.floor(newBase / i);
+      }
+    let varNumber = number;
+    let sumMultiplier = 0;
+    while (varNumber / i  > 0){
+      varNumber = Math.floor(varNumber / i);
+      sumMultiplier += varNumber;
+      }
+    zerosCount = Math.min(zerosCount, Math.floor(sumMultiplier / multipliers));
+    }
+ }
+return zerosCount;
 }
